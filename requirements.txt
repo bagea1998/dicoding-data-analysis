@@ -1,0 +1,16 @@
+streamlit
+pandas
+plotly
+numpy 
+geopandas
+shapely
+datetime
+pathlib
+streamlit_folium
+mpl_toolkits
+scikit-learn
+matplotlib
+seaborn
+warnings
+folium
+scipy
