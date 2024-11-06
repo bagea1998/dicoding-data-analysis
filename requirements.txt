@@ -5,6 +5,7 @@ numpy
 geopandas
 shapely
 datetime
+mapclassify
 pathlib
 streamlit_folium
 scikit-learn
