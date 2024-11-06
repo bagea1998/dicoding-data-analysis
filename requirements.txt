@@ -7,7 +7,6 @@ shapely
 datetime
 pathlib
 streamlit_folium
-mpl_toolkits
 scikit-learn
 matplotlib
 seaborn
