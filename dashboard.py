@@ -67,8 +67,11 @@ df_AirQuality = pd.concat(list_df, ignore_index=True)
 # apps
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
-with open(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/style_.css') as f:
+with open(r'https://github.com/bagea1998/dicoding-data-analysis/blob/master/style_.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# with open(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/style_.css') as f:
+#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 st.sidebar.subheader('Air Quality Dashboard')
 
