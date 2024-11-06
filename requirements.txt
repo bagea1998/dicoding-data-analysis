@@ -12,3 +12,4 @@ matplotlib
 seaborn
 folium
 scipy
+request
