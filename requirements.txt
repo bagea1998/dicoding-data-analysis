@@ -10,6 +10,5 @@ streamlit_folium
 scikit-learn
 matplotlib
 seaborn
-warnings
 folium
 scipy
