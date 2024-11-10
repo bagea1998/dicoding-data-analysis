@@ -83,7 +83,6 @@ map = gdf_station.explore(
 
 st_folium(map, width=1400, height=600)
 
-st.write(df_AirQuality.head())
 df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
 parameters = df_AirQuality.columns[5:11]
 
@@ -143,7 +142,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
-
 
 st.markdown('### Spatio-Temporal Distribution of PM 2.5')
 df_animated = (df_AirQuality.groupby(['station','hour'])['PM2.5'].median().reset_index()).merge(gdf_station, left_on='station', right_on='name',how='left')
