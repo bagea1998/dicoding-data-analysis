@@ -1,9 +1,9 @@
-geopandas==1.0.1
-pandas==2.2.3
-plotly==5.18.0
-Shapely==2.0.6
-streamlit==1.40.0
-streamlit_folium==0.23.1
-mapclassify== 2.8.1
-matplotlib==3.8.2
-folium==0.17.0
+geopandas
+pandas
+plotly
+Shapely
+streamlit
+streamlit_folium
+mapclassify
+matplotlib
+folium
