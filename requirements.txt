@@ -1,4 +1,4 @@
-geopandas==1.0.1
+geopandas==0.10.0
 pandas==2.2.3
 plotly==5.18.0
 Shapely==2.0.6
