@@ -33,8 +33,7 @@ df_StationCoordinates['geometry'] = df_StationCoordinates.apply(lambda row: Poin
 
 gdf_station = gpd.GeoDataFrame(df_StationCoordinates, geometry='geometry', crs='EPSG:4326')
 
-
-base_url = "https://raw.githubusercontent.com/bagea1998/dicoding-data-analysis/master/PRSA_Data_20130301-20170228/"
+base_url = "https://github.com/bagea1998/dicoding-data-analysis/blob/master/dataset/"
 station_names = [
     "Aotizhongxin", "Changping", "Dingling", "Dongsi", "Guanyuan", 
     "Gucheng", "Huairou", "Nongzhanguan", "Shunyi", "Tiantan", 
@@ -60,11 +59,10 @@ df_AirQuality = pd.concat(list_df, ignore_index=True)
 #     list_df.append(df)
 # df_AirQuality = pd.concat(list_df, ignore_index=True)
 
-
 # apps
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
-with open('style_.css') as f:
+with open('dashboard/style_.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # with open(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/style_.css') as f:
