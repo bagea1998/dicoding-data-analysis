@@ -3,11 +3,8 @@ import pandas as pd
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import plotly.express as px
-import numpy as np
 import geopandas as gpd
 from shapely.geometry import Point
-import requests
-import datetime
 import plotly.express as px
 from scipy.interpolate import griddata
 import pathlib
@@ -86,7 +83,6 @@ map = gdf_station.explore(
 )
 
 st_folium(map, width=1400, height=600)
-
 
 df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
 parameters = df_AirQuality.columns[5:11]
