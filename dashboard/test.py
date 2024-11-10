@@ -9,7 +9,6 @@ import plotly.express as px
 import pathlib
 from streamlit_folium import folium_static, st_folium
 from io import StringIO
-import matplotlib
 
 # import data
 coordinates = [
@@ -32,40 +31,40 @@ df_StationCoordinates['geometry'] = df_StationCoordinates.apply(lambda row: Poin
 
 gdf_station = gpd.GeoDataFrame(df_StationCoordinates, geometry='geometry', crs='EPSG:4326')
 
-base_url = "https://github.com/bagea1998/dicoding-data-analysis/blob/master/dataset/"
-station_names = [
-    "Aotizhongxin", "Changping", "Dingling", "Dongsi", "Guanyuan", 
-    "Gucheng", "Huairou", "Nongzhanguan", "Shunyi", "Tiantan", 
-    "Wanliu", "Wanshouxigong"
-]
+# base_url = "https://github.com/bagea1998/dicoding-data-analysis/blob/master/dataset/"
+# station_names = [
+#     "Aotizhongxin", "Changping", "Dingling", "Dongsi", "Guanyuan", 
+#     "Gucheng", "Huairou", "Nongzhanguan", "Shunyi", "Tiantan", 
+#     "Wanliu", "Wanshouxigong"
+# ]
 
-list_df = []
-for station in station_names:
-    file_url = f"{base_url}PRSA_Data_{station}_20130301-20170228.csv"
-    try:
-        df = pd.read_csv(file_url, on_bad_lines='skip')
-        list_df.append(df)
-    except pd.errors.ParserError as e:
-        print(f"Error reading {file_url}: {e}")
-
-df_AirQuality = pd.concat(list_df, ignore_index=True)
-
-# data_dir = pathlib.Path(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/PRSA_Data_20130301-20170228')
-# csv_files = list(data_dir.rglob('*.csv'))
 # list_df = []
-# for  file in csv_files:
-#     df = pd.read_csv(file)
-#     list_df.append(df)
+# for station in station_names:
+#     file_url = f"{base_url}PRSA_Data_{station}_20130301-20170228.csv"
+#     try:
+#         df = pd.read_csv(file_url, on_bad_lines='skip')
+#         list_df.append(df)
+#     except pd.errors.ParserError as e:
+#         print(f"Error reading {file_url}: {e}")
+
 # df_AirQuality = pd.concat(list_df, ignore_index=True)
+
+data_dir = pathlib.Path(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/dataset')
+csv_files = list(data_dir.rglob('*.csv'))
+list_df = []
+for  file in csv_files:
+    df = pd.read_csv(file)
+    list_df.append(df)
+df_AirQuality = pd.concat(list_df, ignore_index=True)
 
 # apps
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
-with open('dashboard/style_.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-# with open(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/style_.css') as f:
+# with open('dashboard/style_.css') as f:
 #     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+with open(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/dashboard/style_.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 st.sidebar.subheader('Air Quality Dashboard')
 
