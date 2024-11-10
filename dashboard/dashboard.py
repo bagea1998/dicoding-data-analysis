@@ -52,6 +52,57 @@ for station in station_names:
 
 df_AirQuality = pd.concat(list_df, ignore_index=True)
 
+def check_missing(df, cut_off=0, sort=True):
+    freq = df.isnull().sum()
+    percent = df.isnull().sum() / df.shape[0] * 100
+    types = df.dtypes
+    def get_unique_values(column):
+        try:
+            if column.apply(lambda x: isinstance(x, list)).any():
+                return pd.unique(column.apply(tuple))
+            elif column.apply(lambda x: isinstance(x, dict)).any():
+                return "Dictionary data"
+            else:
+                return pd.unique(column)
+        except TypeError:
+            return "List Data"
+
+    unique = df.apply(get_unique_values)
+
+    df_miss = pd.DataFrame({
+        'missing_percentage': percent,
+        'missing_frequency': freq,
+        'types': types,
+        'unique_values': unique
+    })
+
+    if sort:
+        df_miss.sort_values(by='missing_frequency', ascending=False, inplace=True)
+
+    return df_miss[df_miss['missing_percentage'] >= cut_off]
+
+data_missing = check_missing(df_AirQuality)
+for col in data_missing[data_missing['missing_percentage']>0].index :
+    if str(df_AirQuality['wd'].dtype) == 'object':
+        df_AirQuality[col] = df_AirQuality[col].fillna(method='ffill')
+    else :
+        df_AirQuality[col].interpolate(method='linear', limit_direction='forward', inplace=True)
+        
+for col in df_AirQuality.select_dtypes(include=['int64', 'float64']).columns[5:]:
+    if col != 'RAIN' :
+        Q1 = df_AirQuality[col].quantile(0.25)
+        Q3 = df_AirQuality[col].quantile(0.75)
+        IQR = Q3 - Q1
+
+        maximum = Q3 + (1.5*IQR)
+        minimum = Q1 - (1.5*IQR)
+
+        kondisi_lower_than = df_AirQuality[col] < minimum
+        kondisi_more_than = df_AirQuality[col] > maximum
+
+        df_AirQuality[col].mask(cond=kondisi_more_than, other=maximum, inplace=True)
+        df_AirQuality[col].mask(cond=kondisi_lower_than, other=minimum, inplace=True)
+
 # data_dir = pathlib.Path(r'G:/Data_Analis/Python/code/tugas_akhir_analisis_data_dicoding/PRSA_Data_20130301-20170228')
 # csv_files = list(data_dir.rglob('*.csv'))
 # list_df = []
