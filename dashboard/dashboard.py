@@ -81,7 +81,7 @@ map = gdf_station.explore(
 
 st_folium(map, width=1400, height=600)
 
-st.write(df_AirQuality.columns)
+st.write(df_AirQuality.head())
 # df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
 # parameters = df_AirQuality.columns[5:11]
 
