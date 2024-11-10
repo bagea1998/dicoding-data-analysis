@@ -81,62 +81,63 @@ map = gdf_station.explore(
 
 st_folium(map, width=1400, height=600)
 
-df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
-parameters = df_AirQuality.columns[5:11]
+st.write(df_AirQuality.columns)
+# df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
+# parameters = df_AirQuality.columns[5:11]
 
-agg_df = df_2017.groupby('station')[parameters].median().reset_index()
+# agg_df = df_2017.groupby('station')[parameters].median().reset_index()
 
-st.markdown('### Top 3 Stations with Highest Median Air Quality Parameters in 2017')
-fig = go.Figure(make_subplots(rows=3, cols=2, 
-                              subplot_titles=[f"Median {param}" for param in parameters],
-                              vertical_spacing=0.15, horizontal_spacing=0.1))
+# st.markdown('### Top 3 Stations with Highest Median Air Quality Parameters in 2017')
+# fig = go.Figure(make_subplots(rows=3, cols=2, 
+#                               subplot_titles=[f"Median {param}" for param in parameters],
+#                               vertical_spacing=0.15, horizontal_spacing=0.1))
 
-for i, parameter in enumerate(parameters):
+# for i, parameter in enumerate(parameters):
 
-    row, col = divmod(i, 2)
-    row += 1
-    col += 1
+#     row, col = divmod(i, 2)
+#     row += 1
+#     col += 1
 
-    data = agg_df[['station', parameter]].nlargest(3, parameter)
+#     data = agg_df[['station', parameter]].nlargest(3, parameter)
 
-    colors = ['steelblue'] * 3
-    max_index = data[parameter].idxmax()
-    colors[data[parameter].index.get_loc(max_index)] = '#FF3333'
+#     colors = ['steelblue'] * 3
+#     max_index = data[parameter].idxmax()
+#     colors[data[parameter].index.get_loc(max_index)] = '#FF3333'
 
-    fig.add_trace(go.Bar(
-        y=data['station'],
-        x=data[parameter],
-        orientation='h',
-        marker=dict(color=colors),
-        name=f"Median {parameter}",
-        text=[f"{value:.2f}" for value in data[parameter]],
-        textposition='inside',
-    ), row=row, col=col)
+#     fig.add_trace(go.Bar(
+#         y=data['station'],
+#         x=data[parameter],
+#         orientation='h',
+#         marker=dict(color=colors),
+#         name=f"Median {parameter}",
+#         text=[f"{value:.2f}" for value in data[parameter]],
+#         textposition='inside',
+#     ), row=row, col=col)
 
-fig.update_layout(
-    title_text="",
-    title_x=0.5,
-    showlegend=False,
-    height=600,
-    width=1400,
-    template="plotly_white"
-)
+# fig.update_layout(
+#     title_text="",
+#     title_x=0.5,
+#     showlegend=False,
+#     height=600,
+#     width=1400,
+#     template="plotly_white"
+# )
 
-st.plotly_chart(fig)
+# st.plotly_chart(fig)
 
-st.markdown('### Trend PM2.5 per Station from 2013 until 2017')
+# st.markdown('### Trend PM2.5 per Station from 2013 until 2017')
 
-data = df_AirQuality.groupby(['year', 'station'])['PM2.5'].median().reset_index()
+# data = df_AirQuality.groupby(['year', 'station'])['PM2.5'].median().reset_index()
 
-fig = px.line(data, x='year', y='PM2.5', color='station', 
-              title='Trend PM2.5 per Station dari 2013 hingga 2017',
-              labels={'year': 'Year', 'PM2.5': 'PM2.5 Concentration', 'station': 'Station'},
-              markers=True)
+# fig = px.line(data, x='year', y='PM2.5', color='station', 
+#               title='Trend PM2.5 per Station dari 2013 hingga 2017',
+#               labels={'year': 'Year', 'PM2.5': 'PM2.5 Concentration', 'station': 'Station'},
+#               markers=True)
 
-fig.update_layout(
-    legend_title="Station",
-    legend=dict(x=1.05, y=1),
-    margin=dict(r=40)
-)
+# fig.update_layout(
+#     legend_title="Station",
+#     legend=dict(x=1.05, y=1),
+#     margin=dict(r=40)
+# )
 
-st.plotly_chart(fig)
+# st.plotly_chart(fig)
