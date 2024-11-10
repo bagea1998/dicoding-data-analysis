@@ -87,7 +87,7 @@ for col in data_missing[data_missing['missing_percentage']>0].index :
         df_AirQuality[col] = df_AirQuality[col].fillna(method='ffill')
     else :
         df_AirQuality[col].interpolate(method='linear', limit_direction='forward', inplace=True)
-        
+
 for col in df_AirQuality.select_dtypes(include=['int64', 'float64']).columns[5:]:
     if col != 'RAIN' :
         Q1 = df_AirQuality[col].quantile(0.25)
@@ -132,7 +132,7 @@ map = gdf_station.explore(
     }
 )
 
-st_folium(map, width=1400, height=300)
+st_folium(map, width=1400, height=1000)
 
 df_2017 = df_AirQuality[df_AirQuality['year'] == 2017]
 parameters = df_AirQuality.columns[5:11]
